@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restok Recipe Importer</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">
+        <img src="../icons/icon-48.png" alt="Restok" width="24" height="24">
+        <span>Restok Importer</span>
+      </div>
+    </header>
+
+    <!-- Loading State -->
+    <div id="loading" class="state">
+      <div class="spinner"></div>
+      <p>Loading...</p>
+    </div>
+
+    <!-- Server URL Configuration -->
+    <div id="config-state" class="state hidden">
+      <p class="description">Configure your Restok server to get started.</p>
+      <form id="config-form">
+        <div class="field">
+          <label for="server-url">Server URL</label>
+          <input type="url" id="server-url" placeholder="https://your-restok-server.com" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Continue</button>
+      </form>
+    </div>
+
+    <!-- Login Form -->
+    <div id="login-state" class="state hidden">
+      <p class="server-info">
+        <span id="server-display"></span>
+        <button type="button" id="change-server" class="btn-link">Change</button>
+      </p>
+      <form id="login-form">
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="you@example.com" required>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Your password" required>
+        </div>
+        <div id="login-error" class="error hidden"></div>
+        <button type="submit" class="btn btn-primary" id="login-btn">
+          <span class="btn-text">Login</span>
+          <span class="btn-loading hidden">Logging in...</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Logged In State -->
+    <div id="logged-in-state" class="state hidden">
+      <div class="user-info">
+        <div class="avatar">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+          </svg>
+        </div>
+        <div class="user-details">
+          <span class="user-email" id="user-email"></span>
+          <span class="user-server" id="user-server"></span>
+        </div>
+      </div>
+      <div class="status-card">
+        <div class="status-icon success">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+          </svg>
+        </div>
+        <div class="status-text">
+          <strong>Connected</strong>
+          <p>Visit a recipe page to import</p>
+        </div>
+      </div>
+      <button type="button" id="logout-btn" class="btn btn-secondary">Logout</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
