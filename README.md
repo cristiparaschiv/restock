@@ -85,7 +85,7 @@ A bilingual (English/Romanian) recipe management web application with automatic 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/restok.git
+git clone https://github.com/cristiparaschiv/restok.git
 cd restok
 ```
 
