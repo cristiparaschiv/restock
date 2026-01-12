@@ -38,15 +38,16 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: restok-backend
+    user: root
     environment:
       - DATABASE_URL=postgresql+asyncpg://restok:${DB_PASSWORD:-restok_secret}@db:5432/restok
       - LIBRETRANSLATE_URL=http://libretranslate:5000
       - SECRET_KEY=${SECRET_KEY:-change-this-in-production-please}
-      - CORS_ORIGINS=["http://localhost:3000"]
+      - CORS_ORIGINS=${CORS_ORIGINS:-["http://localhost:3000"]}
       - DEBUG=true
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
     volumes:
-      - ./backend:/app
+      - ./backend:/app:z
       - backend_uploads:/app/uploads
     ports:
       - "8000:8000"
@@ -61,11 +62,12 @@ services:
       dockerfile: Dockerfile
       target: development
     container_name: restok-frontend
+    user: root
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:8000
       - INTERNAL_API_URL=http://backend:8000
     volumes:
-      - ./frontend:/app
+      - ./frontend:/app:z
       - /app/node_modules
       - /app/.next
     ports:
